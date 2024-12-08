@@ -1,6 +1,6 @@
 services:
-  odoodb:
-    container_name: odoodb
+  odoodb-demo:
+    container_name: odoodb-demo
     image: postgres:15
     user: root
     environment:
@@ -15,18 +15,18 @@ services:
     labels:
       runtipi.managed: true
 
-  odoo:
-    container_name: odoo
+  odoo-demo:
+    container_name: odoo-demo
     image: odoo:18
     user: root
     depends_on:
-      - odoodb
+      - odoodb-demo
     ports:
       - ${APP_PORT}:8069
     tty: true
     command: --
     environment:
-      - HOST=odoodb
+      - HOST=odoodb-demo
       - USER=odoo
       - PASSWORD=${ODOO_POSTGRES_PASSWORD}
     volumes:
